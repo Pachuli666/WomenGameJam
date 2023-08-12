@@ -4,41 +4,37 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
-    private Rigidbody rb;
+    //ESTE SE USA PARA NO USAR RIGIDBODY Y PODER MOVER UN OBJETO
+    private CharacterController controller;
 
     public float playerVelocity = 5f;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();    
+       controller = GetComponent<CharacterController>();    
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        Vector3 movDir;
+        
         float buttonHorizontal = Input.GetAxis("Horizontal");
         float buttonVertical = Input.GetAxis("Vertical") ;
+         
+        //if(buttonHorizontal != 0){
+        //      rb.velocity = new Vector3 (playerVelocity* buttonHorizontal, rb.velocity.y, rb.velocity.z);
         
-        if(buttonHorizontal != 0){
-              rb.velocity = new Vector3 (playerVelocity* buttonHorizontal, rb.velocity.y, rb.velocity.z);
+        //}else{
+        //     rb.velocity = new Vector3 (0, rb.velocity.y, rb.velocity.z);
+        //}
         
-        }else{
-             rb.velocity = new Vector3 (0, rb.velocity.y, rb.velocity.z);
-        }
-        
-        if(buttonVertical != 0){
-        rb.velocity = new Vector3 (rb.velocity.x, rb.velocity.y , playerVelocity * buttonVertical);
-        }else{
+        //if(buttonVertical != 0){
+        //rb.velocity = new Vector3 (rb.velocity.x, rb.velocity.y , playerVelocity * buttonVertical);
+        //}else{
 
-         rb.velocity = new Vector3 (rb.velocity.x, rb.velocity.y, 0);
-        }
-
-        if(Input.GetKey(KeyCode.Space)){
-            rb.velocity = new Vector3 (rb.velocity.x, playerVelocity, rb.velocity.z);
-        }else{
-         rb.velocity = new Vector3 (rb.velocity.x, rb.velocity.y , rb.velocity.z);
-        }
-
+        // rb.velocity = new Vector3 (rb.velocity.x, rb.velocity.y, 0);
+        //}
 
     }
 }
