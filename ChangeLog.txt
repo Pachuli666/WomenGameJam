@@ -1,0 +1,1 @@
+- Creacion de capsula y movimiento del personaje en un plano 3D y salto. ((Error en caida y saltos infinitos))
