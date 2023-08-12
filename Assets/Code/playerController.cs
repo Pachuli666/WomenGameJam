@@ -7,7 +7,11 @@ public class playerController : MonoBehaviour
     //ESTE SE USA PARA NO USAR RIGIDBODY Y PODER MOVER UN OBJETO
     private CharacterController controller;
 
-    public float playerVelocity = 5f;
+    //VELOCIDAD DE MOVIMIENTO HORIZONTAL Y VERTICAL
+    public float walkSpeed = 5f;
+
+    //VELOCIDAD DE GIRO
+    public float turnSpeed = 180f;
 
     void Start()
     {
@@ -18,9 +22,20 @@ public class playerController : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 movDir;
+
+        //AQUI LE DECIMOS QUE CADA VEZ QUE GIRE EN SU PROPIO EJE LO HAGO CON LA VELOCIDAD DE LA VARIABLE TURNSPEED
+        transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
+
+        //EL JUGADOR PUEDE DESPLAZARSE HACIA LOS LADOS
+        movDir = transform.forward * Input.GetAxis("Vertical") * walkSpeed;
         
-        float buttonHorizontal = Input.GetAxis("Horizontal");
-        float buttonVertical = Input.GetAxis("Vertical") ;
+        //CONFIGURAMOS EL MOVIMIENTO TOTAL Y LA POSIBILIDAD DE SALTAR
+        controller.Move(movDir * Time.deltaTime - Vector3.up * 0.1f);
+
+
+        
+        //float buttonHorizontal = Input.GetAxis("Horizontal");
+        //float buttonVertical = Input.GetAxis("Vertical") ;
          
         //if(buttonHorizontal != 0){
         //      rb.velocity = new Vector3 (playerVelocity* buttonHorizontal, rb.velocity.y, rb.velocity.z);
