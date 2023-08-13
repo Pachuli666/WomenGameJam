@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class playerController : MonoBehaviour
 {
     public float speed = 3;
     public float rotationSpeed = 90;
@@ -14,9 +14,13 @@ public class PlayerController : MonoBehaviour
     Vector3 moveVelocity;
     Vector3 turnVelocity;
 
+    private Animator anim;
+    public GameObject model;
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
+       
+        anim = model.GetComponent<Animator>();
     }
 
     void Update()
@@ -37,5 +41,14 @@ public class PlayerController : MonoBehaviour
         moveVelocity.y += gravity * Time.deltaTime;
         characterController.Move(moveVelocity * Time.deltaTime);
         transform.Rotate(turnVelocity * Time.deltaTime);
+      
+      
+      if (hInput != 0 || vInput != 0) {
+    anim.SetBool("walking", true);
+    } else {
+    anim.SetBool("walking", false);
+    }
+
+
     }
 }
