@@ -42,13 +42,15 @@ public class playerController : MonoBehaviour
         characterController.Move(moveVelocity * Time.deltaTime);
         transform.Rotate(turnVelocity * Time.deltaTime);
       
-      
-      if (hInput != 0 || vInput != 0) {
-    anim.SetBool("walking", true);
-    } else {
-    anim.SetBool("walking", false);
-    }
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            anim.SetBool("IsMoving", true);
+        }
 
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            anim.SetBool("IsMoving", false);
+        }
 
     }
 }
